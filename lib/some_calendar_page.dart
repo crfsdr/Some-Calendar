@@ -83,8 +83,7 @@ class _SomeCalendarPageState extends State<SomeCalendarPage> {
         ));
         dateTime = dateTime..add(days: startDayOffset);
       } else {
-        rows.add(Row(
-            children: buildSomeCalendarDay(dateTime.dateTime, lastDate, i)));
+        rows.add(Row(children: buildSomeCalendarDay(dateTime.dateTime, lastDate, i)));
         dateTime = dateTime..add(days: startDayOffset);
       }
     }
@@ -92,11 +91,10 @@ class _SomeCalendarPageState extends State<SomeCalendarPage> {
     return Column(mainAxisSize: MainAxisSize.min, children: rows);
   }
 
-  List<Widget> buildSomeCalendarDay(
-      DateTime rowStartDate, DateTime rowEndDate, int position) {
+  List<Widget> buildSomeCalendarDay(DateTime rowStartDate, DateTime rowEndDate, int position) {
     List<Widget> items = [];
     DateTime currentDate = rowStartDate;
-    rowEndDate = Jiffy(rowEndDate).add(days: 1);
+    rowEndDate = Jiffy(rowEndDate).add(days: 1).dateTime;
     startDayOffset = 0;
     if (position == 1) {
       for (int i = 0; i < 7; i++) {
@@ -184,8 +182,7 @@ class _SomeCalendarPageState extends State<SomeCalendarPage> {
   }
 
   bool isWeekend(currentDate) {
-    return currentDate.weekday == DateTime.sunday ||
-        currentDate.weekday == DateTime.saturday;
+    return currentDate.weekday == DateTime.sunday || currentDate.weekday == DateTime.saturday;
   }
 
   Decoration getDecoration(currentDate) {
@@ -202,14 +199,11 @@ class _SomeCalendarPageState extends State<SomeCalendarPage> {
       if (selectedDates[0] == currentDate) {
         return BoxDecoration(
             color: primaryColor,
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50), topLeft: Radius.circular(50)));
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50), topLeft: Radius.circular(50)));
       } else if (selectedDates[selectedDates.length - 1] == currentDate) {
         return BoxDecoration(
             color: primaryColor,
-            borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(50),
-                topRight: Radius.circular(50)));
+            borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), topRight: Radius.circular(50)));
       } else {
         if (selectedDates.contains(currentDate)) {
           return BoxDecoration(

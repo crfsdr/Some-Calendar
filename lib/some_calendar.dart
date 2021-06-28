@@ -78,8 +78,7 @@ class SomeCalendar extends StatefulWidget {
       viewMode: viewMode,
       scrollDirection: scrollDirection);
 
-  static SomeCalendarState of(BuildContext context) =>
-      context.findAncestorStateOfType();
+  static SomeCalendarState of(BuildContext context) => context.findAncestorStateOfType();
 }
 
 class SomeCalendarState extends State<SomeCalendar> {
@@ -157,8 +156,7 @@ class SomeCalendarState extends State<SomeCalendar> {
     if (mode == SomeMode.Range) {
       if (selectedDates == null) {
         firstRangeDate = Jiffy(DateTime(now.year, now.month, now.day)).dateTime;
-        endRangeDate =
-            Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2);
+        endRangeDate = Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2).dateTime;
       } else {
         DateTime dateRange = now;
         if (selectedDates.length > 0) {
@@ -167,19 +165,14 @@ class SomeCalendarState extends State<SomeCalendar> {
         if (dateRange.difference(startDate).inDays >= 0) {
           if (selectedDates.length > 0) {
             firstRangeDate = Jiffy(selectedDates[0]).dateTime;
-            endRangeDate =
-                Jiffy(selectedDates[selectedDates.length - 1]).dateTime;
+            endRangeDate = Jiffy(selectedDates[selectedDates.length - 1]).dateTime;
           } else {
-            firstRangeDate =
-                Jiffy(DateTime(now.year, now.month, now.day)).dateTime;
-            endRangeDate =
-                Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2);
+            firstRangeDate = Jiffy(DateTime(now.year, now.month, now.day)).dateTime;
+            endRangeDate = Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2).dateTime;
           }
         } else {
-          firstRangeDate =
-              Jiffy(DateTime(now.year, now.month, now.day)).dateTime;
-          endRangeDate =
-              Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2);
+          firstRangeDate = Jiffy(DateTime(now.year, now.month, now.day)).dateTime;
+          endRangeDate = Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2).dateTime;
         }
       }
 
@@ -194,15 +187,12 @@ class SomeCalendarState extends State<SomeCalendar> {
       if (selectedDates.length <= 0)
         generateListDateRange();
       else {
-        var diff = selectedDates[selectedDates.length - 1]
-            .difference(selectedDates[0])
-            .inDays +
-            1;
+        var diff = selectedDates[selectedDates.length - 1].difference(selectedDates[0]).inDays + 1;
         var date = selectedDates[0];
         selectedDates.clear();
         for (int i = 0; i < diff; i++) {
           selectedDates.add(date);
-          date = Jiffy(date).add(days: 1);
+          date = Jiffy(date).add(days: 1).dateTime;
         }
       }
     } else {
@@ -219,8 +209,7 @@ class SomeCalendarState extends State<SomeCalendar> {
     startDate = SomeUtils.setToMidnight(startDate);
     lastDate = SomeUtils.setToMidnight(lastDate);
     pagesCount = SomeUtils.getCountFromDiffDate(startDate, lastDate);
-    controller =
-        PageController(keepPage: false, initialPage: getInitialController());
+    controller = PageController(keepPage: false, initialPage: getInitialController());
 
     pageView = PageView.builder(
       controller: controller,
@@ -271,9 +260,7 @@ class SomeCalendarState extends State<SomeCalendar> {
     if (selectedDate == null) {
       return SomeUtils.getDiffMonth(startDate, Jiffy().dateTime);
     } else {
-      if (selectedDate
-          .difference(startDate)
-          .inDays >= 0)
+      if (selectedDate.difference(startDate).inDays >= 0)
         return SomeUtils.getDiffMonth(startDate, selectedDate);
       else
         return SomeUtils.getDiffMonth(startDate, Jiffy().dateTime);
@@ -336,13 +323,11 @@ class SomeCalendarState extends State<SomeCalendar> {
   }
 
   void generateListDateRange() {
-    var diff = endRangeDate
-        .difference(firstRangeDate)
-        .inDays + 1;
+    var diff = endRangeDate.difference(firstRangeDate).inDays + 1;
     var date = firstRangeDate;
     for (int i = 0; i < diff; i++) {
       selectedDates.add(date);
-      date = Jiffy(date).add(days: 1);
+      date = Jiffy(date).add(days: 1).dateTime;
     }
   }
 
@@ -355,20 +340,16 @@ class SomeCalendarState extends State<SomeCalendar> {
       if (pagesCount <= 1) {
         pageEndDate = lastDate;
       } else {
-        var last = Jiffy(DateTime(startDate.year, startDate.month))
-          ..add(months: 1);
+        var last = Jiffy(DateTime(startDate.year, startDate.month))..add(months: 1);
         var lastDayOfMonth = last..subtract(days: 1);
         pageEndDate = lastDayOfMonth.dateTime;
       }
     } else if (position == pagesCount - 1) {
-      var start = Jiffy(DateTime(lastDate.year, lastDate.month))
-        ..subtract(months: 1);
+      var start = Jiffy(DateTime(lastDate.year, lastDate.month))..subtract(months: 1);
       pageStartDate = start.dateTime;
-      pageEndDate = Jiffy(lastDate).subtract(days: 1);
+      pageEndDate = Jiffy(lastDate).subtract(days: 1).dateTime;
     } else {
-      var firstDateOfCurrentMonth =
-      Jiffy(DateTime(startDate.year, startDate.month))
-        ..add(months: position);
+      var firstDateOfCurrentMonth = Jiffy(DateTime(startDate.year, startDate.month))..add(months: position);
       pageStartDate = firstDateOfCurrentMonth.dateTime;
       var a = firstDateOfCurrentMonth
         ..add(months: 1)
@@ -382,10 +363,7 @@ class SomeCalendarState extends State<SomeCalendar> {
     var heightContainer = mode == SomeMode.Range ? 55 * 6 : 55 * 6;
     return Container(
       height: heightContainer.toDouble(),
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
+      width: MediaQuery.of(context).size.width,
       child: Column(
         children: <Widget>[
           Text(
@@ -417,8 +395,7 @@ class SomeCalendarState extends State<SomeCalendar> {
     var heightContainer = mode == SomeMode.Range ? 55 * 6 : 55 * 6;
     return AlertDialog(
       titlePadding: EdgeInsets.fromLTRB(0, 16, 0, 5),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20))),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
       title: Column(
         children: <Widget>[
           Padding(
@@ -440,10 +417,7 @@ class SomeCalendarState extends State<SomeCalendar> {
                         children: <Widget>[
                           Text(
                             labels.dialogRangeFirstDate,
-                            style: TextStyle(
-                                fontFamily: "playfair-regular",
-                                fontSize: 12,
-                                color: textColor),
+                            style: TextStyle(fontFamily: "playfair-regular", fontSize: 12, color: textColor),
                           ),
                           SizedBox(
                             height: 2,
@@ -452,9 +426,7 @@ class SomeCalendarState extends State<SomeCalendar> {
                             "$dateFirstDate $monthFirstDate, $yearFirstDate",
                             style: TextStyle(
                                 fontFamily: "playfair-regular",
-                                color: isSelectedModeFirstDateRange
-                                    ? textColor
-                                    : textColor.withAlpha(150),
+                                color: isSelectedModeFirstDateRange ? textColor : textColor.withAlpha(150),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),
                           ),
@@ -474,10 +446,7 @@ class SomeCalendarState extends State<SomeCalendar> {
                         children: <Widget>[
                           Text(
                             labels.dialogRangeLastDate,
-                            style: TextStyle(
-                                fontFamily: "playfair-regular",
-                                fontSize: 12,
-                                color: textColor),
+                            style: TextStyle(fontFamily: "playfair-regular", fontSize: 12, color: textColor),
                           ),
                           SizedBox(
                             height: 2,
@@ -486,9 +455,7 @@ class SomeCalendarState extends State<SomeCalendar> {
                             "$dateEndDate $monthEndDate, $yearEndDate",
                             style: TextStyle(
                                 fontFamily: "playfair-regular",
-                                color: isSelectedModeFirstDateRange
-                                    ? textColor.withAlpha(150)
-                                    : textColor,
+                                color: isSelectedModeFirstDateRange ? textColor.withAlpha(150) : textColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),
                           ),
@@ -496,55 +463,47 @@ class SomeCalendarState extends State<SomeCalendar> {
                       ),
                     ),
                   ),
-                ] else
-                  if (mode == SomeMode.Single) ...[
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Selected Date",
-                            style: TextStyle(
-                                fontFamily: "playfair-regular",
-                                fontSize: 12,
-                                color: textColor),
-                          ),
-                          Text(
-                            "$dateFirstDate $monthFirstDate, $yearFirstDate",
-                            style: TextStyle(
-                                fontFamily: "playfair-regular",
-                                color: textColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ] else
-                    ...[
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Selected Date",
-                              style: TextStyle(
-                                  fontFamily: "playfair-regular",
-                                  fontSize: 12,
-                                  color: textColor),
-                            ),
-                            Text(
-                              "$monthFirstDate, $yearFirstDate",
-                              style: TextStyle(
-                                  fontFamily: "playfair-regular",
-                                  color: textColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          ],
+                ] else if (mode == SomeMode.Single) ...[
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Selected Date",
+                          style: TextStyle(fontFamily: "playfair-regular", fontSize: 12, color: textColor),
                         ),
-                      ),
-                    ]
+                        Text(
+                          "$dateFirstDate $monthFirstDate, $yearFirstDate",
+                          style: TextStyle(
+                              fontFamily: "playfair-regular",
+                              color: textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      ],
+                    ),
+                  ),
+                ] else ...[
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Selected Date",
+                          style: TextStyle(fontFamily: "playfair-regular", fontSize: 12, color: textColor),
+                        ),
+                        Text(
+                          "$monthFirstDate, $yearFirstDate",
+                          style: TextStyle(
+                              fontFamily: "playfair-regular",
+                              color: textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      ],
+                    ),
+                  ),
+                ]
               ],
             ),
           ),
@@ -563,10 +522,7 @@ class SomeCalendarState extends State<SomeCalendar> {
       contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
       content: Container(
         height: heightContainer.toDouble(),
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         child: Column(
           children: <Widget>[
             if (mode != SomeMode.Multi) ...[
@@ -587,8 +543,7 @@ class SomeCalendarState extends State<SomeCalendar> {
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
-                  Container(
-                      height: heightContainer.toDouble(), child: pageView),
+                  Container(height: heightContainer.toDouble(), child: pageView),
                 ],
               ),
             ),
@@ -613,10 +568,7 @@ class SomeCalendarState extends State<SomeCalendar> {
                       padding: EdgeInsets.only(top: 8, bottom: 8),
                       child: Text(
                         labels.dialogDone,
-                        style: TextStyle(
-                            fontFamily: "Avenir",
-                            fontSize: 14,
-                            color: Colors.white),
+                        style: TextStyle(fontFamily: "Avenir", fontSize: 14, color: Colors.white),
                       ),
                     ),
                   ),
@@ -634,10 +586,7 @@ class SomeCalendarState extends State<SomeCalendar> {
                     padding: EdgeInsets.only(top: 8, bottom: 8),
                     child: Text(
                       labels.dialogCancel,
-                      style: TextStyle(
-                          fontFamily: "Avenir",
-                          fontSize: 14,
-                          color: primaryColor),
+                      style: TextStyle(fontFamily: "Avenir", fontSize: 14, color: primaryColor),
                     ),
                   ),
                 ),

@@ -55,8 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     initializeDateFormatting();
-    Intl.systemLocale =
-        'en_En'; // to change the calendar format based on localization
+    Intl.systemLocale = 'en_En'; // to change the calendar format based on localization
     super.initState();
   }
 
@@ -102,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 isWithoutDialog: false,
                                 selectedDate: selectedDate,
                                 startDate: new DateTime(2020, 6, 28),
-                                lastDate: Jiffy().add(months: 9),
+                                lastDate: Jiffy().add(months: 9).dateTime,
                                 done: (date) {
                                   setState(() {
                                     selectedDate = date;
@@ -119,8 +118,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           context: context,
                           builder: (_) => SomeCalendar(
                                 mode: SomeMode.Multi,
-                                startDate: Jiffy().subtract(years: 3),
-                                lastDate: Jiffy().add(months: 9),
+                                startDate: Jiffy().subtract(years: 3).dateTime,
+                                lastDate: Jiffy().add(months: 9).dateTime,
                                 isWithoutDialog: false,
                                 selectedDates: selectedDates,
                                 labels: new Labels(
@@ -152,8 +151,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   dialogRangeLastDate: 'Tanggal Terakhir',
                                 ),
                                 primaryColor: Color(0xff5833A5),
-                                startDate: Jiffy().subtract(years: 3),
-                                lastDate: Jiffy().add(months: 9),
+                                startDate: Jiffy().subtract(years: 3).dateTime,
+                                lastDate: Jiffy().add(months: 9).dateTime,
                                 selectedDates: selectedDates,
                                 isWithoutDialog: false,
                                 done: (date) {
@@ -187,8 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => MainSingleWithoutDialog()),
+                        MaterialPageRoute(builder: (context) => MainSingleWithoutDialog()),
                       );
                     },
                   ),
@@ -197,8 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => MainMultiWithoutDialog()),
+                        MaterialPageRoute(builder: (context) => MainMultiWithoutDialog()),
                       );
                     },
                   ),
@@ -207,8 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => MainRangeWithoutDialog()),
+                        MaterialPageRoute(builder: (context) => MainRangeWithoutDialog()),
                       );
                     },
                   ),
