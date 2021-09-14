@@ -33,7 +33,7 @@ class SomeWeekLabel extends StatelessWidget {
 
     DateFormat _localeDate = DateFormat.yMMM();
     for (var i = firstDayOfWeek, count = 0; count < 7; i = (i + 1) % 7, count++) {
-      list.add(_weekdayContainer(_localeDate.dateSymbols.STANDALONESHORTWEEKDAYS[i], textStyle));
+      list.add(_weekdayContainer(_localeDate.dateSymbols.STANDALONENARROWWEEKDAYS[i], textStyle));
     }
 
     return Row(children: list);
