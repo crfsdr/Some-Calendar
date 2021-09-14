@@ -13,13 +13,14 @@ enum SomeMode { Range, Single, Multi }
 enum ViewMode { READ, EDIT }
 
 class Labels {
-  final String dialogDone, dialogCancel, dialogRangeFirstDate, dialogRangeLastDate;
+  final String dialogDone, dialogCancel, dialogRangeFirstDate, dialogRangeLastDate, dialogSelectedDate;
 
   Labels({
     this.dialogDone = 'Done',
     this.dialogCancel = 'Cancel',
     this.dialogRangeFirstDate = 'First Date',
     this.dialogRangeLastDate = 'Last Date',
+    this.dialogSelectedDate = "Selected Date",
   });
 }
 
@@ -469,7 +470,7 @@ class SomeCalendarState extends State<SomeCalendar> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Selected Date",
+                          labels.dialogSelectedDate,
                           style: TextStyle(fontFamily: "playfair-regular", fontSize: 12, color: textColor),
                         ),
                         Text(
@@ -489,7 +490,7 @@ class SomeCalendarState extends State<SomeCalendar> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Selected Date",
+                          labels.dialogSelectedDate,
                           style: TextStyle(fontFamily: "playfair-regular", fontSize: 12, color: textColor),
                         ),
                         Text(
