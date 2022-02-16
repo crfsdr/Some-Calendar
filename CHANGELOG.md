@@ -1,4 +1,4 @@
-## [1.2.7] - 16 February 2022.
+## [1.2.9] - 16 February 2022.
 
 - Null safety
 
