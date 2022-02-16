@@ -9,7 +9,7 @@ class MainMultiWithoutDialog extends StatefulWidget {
 
 class _MainMultiWithoutDialogState extends State<MainMultiWithoutDialog> {
   DateTime selectedDate = DateTime.now();
-  List<DateTime> selectedDates = List();
+  List<DateTime> selectedDates = [];
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -49,7 +49,7 @@ class _MainMultiWithoutDialogState extends State<MainMultiWithoutDialog> {
   }
 
   void showSnackbar(String x) {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(x),
     ));
   }
